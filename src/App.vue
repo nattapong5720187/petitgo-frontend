@@ -1,8 +1,15 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg bg-nav">
       <div class="container-fluid">
-        <span class="navbar-brand">PetItGo</span>
+        <img
+          src="./assets/img/logo_petitgo02.png"
+          width="40"
+          height="40"
+          class="d-inline-block align-top"
+          alt=""
+        />
+        <span class="navbar-brand mx-3 text-nav">PetItGo</span>
         <button
           class="navbar-toggler"
           type="button"
@@ -37,6 +44,14 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+.bg-nav {
+  background-color: #F3D6C0 !important;
+}
+
+.text-nav {
+  color: #4925A0 !important;
 }
 
 nav {

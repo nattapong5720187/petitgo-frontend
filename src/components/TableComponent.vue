@@ -1,18 +1,19 @@
 <template>
   <div id="tableComponent">
     <div class="container-fluid">
-      <b-table
-        :items="paginatedItems"
-        :fields="tableFields"
-        striped
-        hover
-      ></b-table>
       <b-pagination
+        v-if="tableItems.length"
         v-model="currentPage"
         :total-rows="totalRows"
         :per-page="perPage"
         aria-controls="my-table"
       ></b-pagination>
+      <b-table
+        :items="paginatedItems"
+        :fields="tableFields"
+        bordered
+        hover
+      ></b-table>
     </div>
   </div>
 </template>
