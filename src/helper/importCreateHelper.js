@@ -9,7 +9,7 @@ export default {
         importData.orderNo = row[0];
         importData.marketplace = row[1];
         importData.orderTime = moment(row[3]).format("DD/MM/YYYY hh:mm");
-        importData.productName = row[4];
+        importData.productName = row[4] + variationName(row[5]);
         importData.price = row[6];
         importData.quantity = row[7];
         importData.commodityCost = row[9];
@@ -28,6 +28,14 @@ export default {
     return listImportExcel;
   },
 };
+
+function variationName(dataRow) {
+  if (dataRow) {
+    return " " + dataRow;
+  } else {
+    return "";
+  }
+}
 
 function checkHeader(dataRow) {
   if (dataRow[0]) {

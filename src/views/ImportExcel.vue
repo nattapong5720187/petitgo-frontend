@@ -1,6 +1,6 @@
 <template>
   <div class="importExcel">
-    <div class="d-flex flex-column align-items-center">
+    <div class="d-flex flex-column align-items-center mt-5">
       <form>
         <div class="form-group">
           <label for="exampleFormControlFile1">Import Excel</label>
@@ -12,12 +12,12 @@
           />
         </div>
       </form>
-      <TableComponent
-        :tableItems="tableData && tableData.length ? tableData : []"
-        :tableFields="fields && fields.length ? fields : []"
-        v-if="tableData.length"
-      ></TableComponent>
     </div>
+    <TableComponent
+      class="mt-5"
+      :tableItems="tableData && tableData.length ? tableData : []"
+      :tableFields="fields"
+    ></TableComponent>
   </div>
 </template>
 
@@ -48,8 +48,6 @@ export default {
       const file = event.target.files[0];
       excelHelper.ReadExcelFile(file).then((value) => {
         this.tableData = impoerCreateHelper.GetExcelToJson(value.contents)
-        console.log("tableData", this.tableData);  // ตรวจสอบค่า tableData
-        console.log("fields", this.fields);     // ตรวจสอบค่า fields
       })
     },
   },

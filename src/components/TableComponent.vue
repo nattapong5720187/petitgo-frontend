@@ -1,12 +1,19 @@
 <template>
   <div id="tableComponent">
-    <b-table :items="paginatedItems" :fields="tableFields" striped hover></b-table>
-    <b-pagination
-      v-model="currentPage"
-      :total-rows="totalRows"
-      :per-page="perPage"
-      aria-controls="my-table"
-    ></b-pagination>
+    <div class="container-fluid">
+      <b-table
+        :items="paginatedItems"
+        :fields="tableFields"
+        striped
+        hover
+      ></b-table>
+      <b-pagination
+        v-model="currentPage"
+        :total-rows="totalRows"
+        :per-page="perPage"
+        aria-controls="my-table"
+      ></b-pagination>
+    </div>
   </div>
 </template>
 
@@ -26,8 +33,8 @@ export default {
   data() {
     return {
       currentPage: 1,
-      perPage: 10
-    }
+      perPage: 10,
+    };
   },
   computed: {
     totalRows() {
@@ -37,8 +44,8 @@ export default {
       const start = (this.currentPage - 1) * this.perPage;
       const end = start + this.perPage;
       return this.tableItems.slice(start, end);
-    }
-  }
+    },
+  },
 };
 </script>
 
