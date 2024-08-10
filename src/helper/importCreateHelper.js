@@ -19,7 +19,6 @@ export default {
         importData.shippingFee = row[13];
         importData.orderMark = row[14];
         importData.existed = row[15];
-        importData.profit = row[21];
         listImportExcel.push(importData);
       }
     });
@@ -111,6 +110,32 @@ function getSummaryTapeAndLabel(listImportExcel) {
   if (listImportExcel.length > 0) {
     listImportExcel.forEach((data) => {
       data.tapeAndLabel = 0.5 / parseInt(data.existed);
+    });
+    let summaryCost = getSummaryCost(listImportExcel);
+    return summaryCost;
+  }
+}
+
+function getSummaryCost(listImportExcel) {
+  if (listImportExcel.length > 0) {
+    listImportExcel.forEach((data) => {
+      data.cost = (data.commodityCost * data.quantity) + data.totalFee + data.packaging + data.tapeAndLabel;
+    });
+    let summaryProfit = getSummaryProfit(listImportExcel);
+    return summaryProfit;
+  }
+}
+
+function getSummaryProfit(listImportExcel) {
+  if (listImportExcel.length > 0) {
+    listImportExcel.forEach((data) => {
+      let calProfit = (data.price * data.quantity)
+      if (data.marketplace === "TikTok") {
+        calProfit = calProfit + ((data.voucher + data.managementFee) / data.existed)
+      } else {
+        calProfit = calProfit / data.existed
+      }
+      data.profit = calProfit > 0 ? calProfit.toFixed(2) : `(${calProfit.toFixed(2) * -1})`
     });
     return listImportExcel;
   }
