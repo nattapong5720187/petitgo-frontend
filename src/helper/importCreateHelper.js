@@ -124,7 +124,8 @@ function getSummaryPackaging(listImportExcel) {
 function getSummaryTapeAndLabel(listImportExcel) {
   if (listImportExcel.length > 0) {
     listImportExcel.forEach((data) => {
-      data.tapeAndLabel = 0.5 / parseInt(data.existed)
+      const isManual = ["Manual", "POS Retail Orders"].includes(data.marketplace)
+      data.tapeAndLabel = isManual ? 0 :  0.5 / parseInt(data.existed)
     })
     let summaryCost = getSummaryCost(listImportExcel)
     return summaryCost
@@ -135,7 +136,7 @@ function getSummaryCost(listImportExcel) {
   if (listImportExcel.length > 0) {
     listImportExcel.forEach((data) => {
       let commodityCost = data.commodityCost
-          ? parseInt(data.commodityCost)
+          ? parseFloat(data.commodityCost)
           : 0
         let quantity = data.quantity
           ? parseInt(data.quantity)
@@ -164,8 +165,7 @@ function getSummaryProfit(listImportExcel) {
       } else {
         calProfit = calProfit / data.existed
       }
-      data.profit = calProfit - data.cost
-      console.log(data.profit);
+      data.profit = (calProfit - data.cost).toFixed(2)
       
     })
     return listImportExcel
